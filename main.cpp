@@ -11,6 +11,7 @@ struct Task {
     bool completed;
 };
 
+void display_menu();
 void add(std::vector<Task>&tasks, std::ofstream&outputFile);
 void del();
 void view(std::vector<Task>tasks);
@@ -25,10 +26,7 @@ int main(void) {
     }
 
     std::cout << "Welcome to Task Manager!\n";
-    std::cout << "1. Add task\n";
-    std::cout << "2. Delete task\n";
-    std::cout << "3. View tasks\n";
-    std::cout << "4. Save and exit\n";
+    display_menu();
 
     int x = 0;
     while (std::cin >> x) {
@@ -44,15 +42,18 @@ int main(void) {
         } else if (x < 1 || x > 4) {
             std::cout << "Enter a valid option!\n";
         }
-        std::cout << '\n';
-        std::cout << "1. Add task\n";
-        std::cout << "2. Delete task\n";
-        std::cout << "3. View tasks\n";
-        std::cout << "4. Save and exit\n";
+        display_menu();
     }
     return 0;
 }
 
+void display_menu() {
+    std::cout << '\n';
+    std::cout << "1. Add task\n";
+    std::cout << "2. Delete task\n";
+    std::cout << "3. View tasks\n";
+    std::cout << "4. Save and exit\n";
+}
 
 void add(std::vector<Task>&tasks, std::ofstream&outputFile) {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -63,7 +64,6 @@ void add(std::vector<Task>&tasks, std::ofstream&outputFile) {
     Task newTask{userInput, false};
     tasks.push_back(newTask);
     std::cout << "Task added!\n";
-    std::cout << '\n';
 }
 
 void del() {
