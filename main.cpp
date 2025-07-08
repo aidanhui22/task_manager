@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -12,7 +13,7 @@ struct Task {
 
 void add(std::vector<Task>&tasks, std::ofstream&outputFile);
 void del();
-void view();
+void view(std::vector<Task>tasks);
 
 int main(void) {
     std::ofstream outputFile("tasks.txt");
@@ -37,12 +38,13 @@ int main(void) {
         } else if (x == 2) {
             del();
         } else if (x == 3) {
-            view();
+            view(tasks);
         } else if (x == 4) {
             break;
         } else if (x < 1 || x > 4) {
             std::cout << "Enter a valid option!\n";
         }
+        std::cout << '\n';
         std::cout << "1. Add task\n";
         std::cout << "2. Delete task\n";
         std::cout << "3. View tasks\n";
@@ -65,9 +67,16 @@ void add(std::vector<Task>&tasks, std::ofstream&outputFile) {
 }
 
 void del() {
-
+    
 }
 
-void view() {
-
+void view(std::vector<Task>tasks) {
+    for (int i = 0; i < tasks.size(); i++) {
+        std::cout << "Task " << i + 1 << ": " << tasks[i].description << ", ";
+        if (tasks[i].completed == false) {
+            std::cout << "Uncompleted.." << std::endl;
+        } else {
+            std::cout << "Completed!" << std::endl;
+        }
+    }
 }
