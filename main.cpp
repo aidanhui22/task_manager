@@ -1,5 +1,7 @@
+#include <ios>
 #include <iostream>
 #include <fstream>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -29,6 +31,7 @@ int main(void) {
 
     int x = 0;
     while (std::cin >> x) {
+        std::cout << '\n';
         if (x == 1) {
             add(tasks, outputFile);
         } else if (x == 2) {
@@ -43,21 +46,22 @@ int main(void) {
         std::cout << "1. Add task\n";
         std::cout << "2. Delete task\n";
         std::cout << "3. View tasks\n";
-        std::cout << "4. Save and exit";
+        std::cout << "4. Save and exit\n";
     }
     return 0;
 }
 
 
 void add(std::vector<Task>&tasks, std::ofstream&outputFile) {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::string userInput;
     std::cout << "Enter task description: ";
     std::getline(std::cin, userInput);
     outputFile << userInput << std::endl;
-
     Task newTask{userInput, false};
     tasks.push_back(newTask);
     std::cout << "Task added!\n";
+    std::cout << '\n';
 }
 
 void del() {
