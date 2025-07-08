@@ -1,0 +1,1 @@
+A simple task manager run on command line. User can add, delete and view their tasks, saving them to a text file before quitting.
